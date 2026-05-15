@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gabriela Vidal — Journalist & Digital Media Creator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --white:      #ffffff;
+    --off-white:  #f8f6f1;
+    --parchment:  #ede9df;
+    --ink:        #1c1a17;
+    --charcoal:   #3d3a35;
+    --muted:      #7c7870;
+    --border:     #ddd8cf;
+    --green:      #3a7d52;
+    --green-lt:   #eaf3ee;
+    --green-mid:  #c4dece;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--white);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 3rem;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem; font-weight: 700;
+    color: var(--ink); text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--green); }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    background: var(--off-white);
+    display: grid;
+    grid-template-rows: 1fr auto;
+    padding-top: 68px;
+    position: relative; overflow: hidden;
+  }
+  .hero-main {
+    display: flex; flex-direction: column;
+    justify-content: center;
+    padding: 5rem 5rem 3rem;
+    position: relative; z-index: 2;
+  }
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.68rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--green);
+    margin-bottom: 1.8rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .hero-tag::before { content: ''; width: 32px; height: 1px; background: var(--green); }
+  .hero-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(5rem, 11vw, 10rem);
+    line-height: 0.92; font-weight: 700;
+    color: var(--ink); letter-spacing: -0.02em;
+    margin-bottom: 0.15em;
+  }
+  .hero-name .italic { font-style: italic; color: var(--green); }
+  .hero-descriptor {
+    display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem;
+    margin: 1.5rem 0 2rem; align-items: center;
+  }
+  .hero-descriptor span { font-size: 1rem; font-weight: 400; color: var(--charcoal); }
+  .hero-descriptor .dot {
+    width: 4px; height: 4px; border-radius: 50%; background: var(--green-mid);
+  }
+  .hero-tagline {
+    font-size: 1.05rem; line-height: 1.8; color: var(--muted);
+    max-width: 540px; margin-bottom: 3rem; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1.2rem; align-items: center; }
+  .btn-primary {
+    background: var(--green); color: white;
+    padding: 1rem 2.2rem; border-radius: 2px;
+    font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+    text-transform: uppercase; text-decoration: none;
+    transition: background 0.2s, transform 0.2s; display: inline-block;
+  }
+  .btn-primary:hover { background: #2e6341; transform: translateY(-2px); }
+  .btn-ghost {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--charcoal); text-decoration: none;
+    border-bottom: 1px solid var(--border); padding-bottom: 2px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--green); border-color: var(--green); }
+
+  /* Stat bar - WHITE background with dark text */
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border);
+    background: var(--white);
+  }
+  .hero-stat {
+    padding: 1.8rem 2rem;
+    border-right: 1px solid var(--border);
+    display: flex; flex-direction: column; gap: 0.3rem;
+  }
+  .hero-stat:last-child { border-right: none; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.6rem; font-weight: 700;
+    color: var(--ink); line-height: 1;
+  }
+  .stat-num.green { color: var(--green); }
+  .stat-desc { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.02em; }
+
+  /* Large decorative letter */
+  .hero-bg-g {
+    position: absolute; right: -0.05em; bottom: -0.15em;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40vw; font-weight: 700; line-height: 1;
+    color: rgba(58,125,82,0.05); pointer-events: none;
+    user-select: none; z-index: 1;
+  }
+
+  /* TICKER */
+  .ticker-wrap { overflow: hidden; background: var(--green); padding: 0.75rem 0; }
+  .ticker {
+    display: flex; animation: ticker 28s linear infinite;
+    white-space: nowrap; width: max-content;
+  }
+  .ticker-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.18em;
+    text-transform: uppercase; color: rgba(255,255,255,0.8);
+    padding: 0 3rem;
+  }
+  .ticker-item strong { color: white; }
+  @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+  /* ABOUT */
+  #about {
+    display: grid; grid-template-columns: 5fr 7fr; background: var(--white);
+  }
+  .about-left {
+    background: var(--parchment);
+    padding: 6rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    position: relative; overflow: hidden;
+  }
+  .about-left::after {
+    content: '9';
+    position: absolute; right: -0.1em; bottom: -0.2em;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22rem; font-weight: 700;
+    color: rgba(58,125,82,0.07); line-height: 1; pointer-events: none;
+  }
+  .about-years-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 0.4rem;
+  }
+  .about-years-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 6rem; font-weight: 700; color: var(--ink); line-height: 1;
+    margin-bottom: 0.2em;
+  }
+  .about-years-text {
+    font-size: 0.95rem; color: var(--charcoal); line-height: 1.7;
+    max-width: 240px; margin-bottom: 2.5rem;
+  }
+  .emmy-badge {
+    display: inline-flex; align-items: center; gap: 0.8rem;
+    background: var(--white); border: 1px solid var(--border);
+    padding: 0.8rem 1.2rem; border-radius: 100px;
+  }
+  .emmy-text { font-size: 0.75rem; font-weight: 600; color: var(--ink); }
+  .emmy-sub { font-size: 0.65rem; color: var(--muted); display: block; }
+
+  .about-right {
+    padding: 6rem 5rem 6rem 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .section-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 1rem;
+  }
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 3.5vw, 3.2rem); font-weight: 700;
+    line-height: 1.1; color: var(--ink); margin-bottom: 1.5rem;
+  }
+  .section-heading em { font-style: italic; color: var(--green); }
+  .body-copy {
+    font-size: 0.98rem; line-height: 1.9; color: var(--charcoal);
+    margin-bottom: 1.2rem; font-weight: 300;
+  }
+  .body-copy strong { color: var(--green); font-weight: 600; }
+
+  .skills-wrap { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .skill-tag {
+    font-size: 0.72rem; font-weight: 500;
+    padding: 0.5rem 1rem; border-radius: 100px;
+    border: 1px solid var(--green-mid); background: var(--green-lt);
+    color: var(--green);
+  }
+
+  /* EXPERIENCE */
+  #experience { background: var(--off-white); padding: 7rem 5rem; }
+  .exp-top {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 4rem; flex-wrap: wrap; gap: 1rem;
+  }
+  .exp-download {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--green); text-decoration: none;
+    border-bottom: 1px solid var(--green); padding-bottom: 2px;
+    transition: opacity 0.2s;
+  }
+  .exp-download:hover { opacity: 0.7; }
+  .timeline { position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .tl-item { padding-left: 2.5rem; margin-bottom: 3rem; position: relative; }
+  .tl-item::before {
+    content: ''; position: absolute; left: -5px; top: 0.4rem;
+    width: 11px; height: 11px; border-radius: 50%;
+    background: var(--white); border: 2px solid var(--green);
+    box-shadow: 0 0 0 3px var(--green-lt);
+  }
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 0.3rem;
+  }
+  .tl-role {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 700; color: var(--ink); margin-bottom: 0.1rem;
+  }
+  .tl-company { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.9rem; }
+  .tl-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
+  .tl-bullets li {
+    font-size: 0.88rem; color: var(--charcoal);
+    padding-left: 1.1rem; position: relative; line-height: 1.65;
+  }
+  .tl-bullets li::before {
+    content: '—'; position: absolute; left: 0;
+    color: var(--green-mid); font-size: 0.8rem;
+  }
+
+  /* PHOTOGRAPHY */
+  #photography { background: var(--white); padding: 7rem 5rem; }
+  .photo-intro {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 4rem; align-items: end; margin-bottom: 4rem;
+  }
+  .photo-desc {
+    font-size: 0.95rem; line-height: 1.85; color: var(--charcoal); font-weight: 300;
+  }
+  .photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+  }
+  .photo-card {
+    position: relative; overflow: hidden; border-radius: 3px;
+    background: var(--parchment); cursor: pointer;
+  }
+  .photo-card.tall { grid-row: span 2; }
+  .photo-card.wide { grid-column: span 2; }
+  .photo-placeholder {
+    width: 100%; min-height: 220px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    padding: 3rem 2rem; text-align: center;
+    background: linear-gradient(135deg, var(--parchment) 0%, var(--green-lt) 100%);
+    transition: transform 0.4s ease;
+  }
+  .photo-card.tall .photo-placeholder { min-height: 460px; }
+  .photo-card:hover .photo-placeholder { transform: scale(1.03); }
+  .photo-icon { font-size: 2rem; margin-bottom: 0.8rem; opacity: 0.45; }
+  .photo-hint {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted);
+  }
+  .photo-label {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: linear-gradient(to top, rgba(28,26,23,0.65) 0%, transparent 100%);
+    padding: 2rem 1.2rem 1rem;
+  }
+  .photo-label-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem; font-weight: 600; color: white; display: block;
+  }
+  .photo-label-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.12em; color: rgba(255,255,255,0.65);
+  }
+  .photo-cta { margin-top: 2.5rem; }
+  .photo-cta a {
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--green); text-decoration: none;
+    border-bottom: 1px solid var(--green-mid); padding-bottom: 2px;
+    transition: border-color 0.2s;
+  }
+  .photo-cta a:hover { border-color: var(--green); }
+
+  /* SOCIAL */
+  #social { background: var(--parchment); padding: 7rem 5rem; }
+  .social-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem; margin-top: 3rem;
+  }
+  .social-card {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 3px; padding: 2.2rem;
+    position: relative; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .social-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(58,125,82,0.1);
+  }
+  .social-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: var(--green); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .social-card:hover::before { transform: scaleX(1); }
+  .social-platform {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--green); margin-bottom: 0.9rem;
+  }
+  .social-metric {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.8rem; font-weight: 700; color: var(--ink); line-height: 1;
+  }
+  .social-metric-label { font-size: 0.78rem; color: var(--muted); margin-bottom: 1.2rem; margin-top: 0.2rem; }
+  .social-desc {
+    font-size: 0.86rem; line-height: 1.75; color: var(--charcoal);
+    border-top: 1px solid var(--border); padding-top: 1.1rem; font-weight: 300;
+  }
+
+  /* WORK */
+  #work { background: var(--white); padding: 7rem 5rem; }
+  .work-grid {
+    margin-top: 3rem;
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem;
+  }
+  .work-card {
+    border-radius: 3px; overflow: hidden;
+    border: 1px solid var(--border); background: var(--off-white);
+    display: flex; flex-direction: column;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .work-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(28,26,23,0.08); }
+  .work-card.featured { grid-column: span 2; }
+  .work-thumb {
+    height: 200px; display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--parchment), var(--green-lt));
+  }
+  .work-card.featured .work-thumb { height: 260px; }
+  .work-body { padding: 1.4rem; flex: 1; }
+  .work-pill {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+    background: var(--green-lt); color: var(--green);
+    padding: 0.25rem 0.7rem; border-radius: 100px;
+    display: inline-block; margin-bottom: 0.7rem;
+  }
+  .work-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; font-weight: 700; color: var(--ink); margin-bottom: 0.3rem;
+  }
+  .work-sub { font-size: 0.78rem; color: var(--muted); }
+
+  /* CONTACT */
+  #contact {
+    background: var(--off-white); padding: 7rem 5rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+  }
+  .contact-tagline {
+    font-size: 0.95rem; line-height: 1.85; color: var(--charcoal);
+    margin: 1rem 0 2.5rem; font-weight: 300;
+  }
+  .contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
+  .contact-link {
+    display: flex; align-items: center; gap: 1rem; text-decoration: none;
+    padding: 1rem 1.3rem; border: 1px solid var(--border); border-radius: 3px;
+    background: var(--white); transition: border-color 0.2s, transform 0.2s;
+  }
+  .contact-link:hover { border-color: var(--green); transform: translateX(4px); }
+  .cl-icon {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: var(--green-lt); color: var(--green);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0; font-weight: 600;
+  }
+  .cl-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.58rem; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted); display: block; margin-bottom: 0.1rem;
+  }
+  .cl-value { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+
+  /* Contact right panel — green background, WHITE text */
+  .contact-right-panel {
+    background: var(--green); border-radius: 3px; padding: 3rem; color: white;
+  }
+  .crp-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: rgba(255,255,255,0.75); margin-bottom: 1.2rem;
+  }
+  .crp-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 700; color: white;
+    line-height: 1.3; margin-bottom: 2rem;
+  }
+  .avail-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 2rem; }
+  .avail-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: #a8e6be;
+    animation: pulse 2s infinite;
+  }
+  @keyframes pulse {
+    0%,100%{box-shadow:0 0 0 0 rgba(168,230,190,0.5)}
+    50%{box-shadow:0 0 0 7px rgba(168,230,190,0)}
+  }
+  .avail-text { font-size: 0.82rem; color: rgba(255,255,255,0.9); }
+  .open-to { display: flex; flex-direction: column; gap: 0.65rem; }
+  .open-item {
+    font-size: 0.85rem; color: rgba(255,255,255,0.92);
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .open-item::before { content:''; width:16px; height:1px; background:rgba(255,255,255,0.35); flex-shrink:0; }
+
+  /* FOOTER — dark but smaller, clearly readable */
+  footer {
+    background: var(--ink); padding: 2rem 5rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; font-weight: 700; color: white;
+  }
+  .footer-info {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.5);
+  }
+
+  /* ANIMATIONS */
+  .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 880px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1.2rem; }
+    .hero-main { padding: 4rem 1.5rem 2rem; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+    #about { grid-template-columns: 1fr; }
+    .about-left, .about-right { padding: 4rem 2rem; }
+    #experience, #photography, #social, #work { padding: 4rem 1.5rem; }
+    .photo-intro { grid-template-columns: 1fr; gap: 1.5rem; }
+    .photo-grid { grid-template-columns: 1fr 1fr; }
+    .photo-card.tall { grid-row: span 1; }
+    .social-grid, .work-grid { grid-template-columns: 1fr; }
+    .work-card.featured { grid-column: span 1; }
+    #contact { grid-template-columns: 1fr; padding: 4rem 1.5rem; gap: 3rem; }
+    footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">Gabriela Vidal</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#photography">Photography</a></li>
+    <li><a href="#social">Social</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-main reveal">
+    <p class="hero-tag">Denver, CO · Available for Projects</p>
+    <h1 class="hero-name">Gabriela<br><span class="italic">Vidal</span></h1>
+    <div class="hero-descriptor">
+      <span>Journalist</span><div class="dot"></div>
+      <span>Storyteller</span><div class="dot"></div>
+      <span>Social Media Creator</span><div class="dot"></div>
+      <span>Photographer</span>
+    </div>
+    <p class="hero-tagline">Emmy-nominated multimedia journalist with 9 years of experience turning complex stories into content that connects — across broadcast, digital, and social platforms.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="#contact">Let's Work Together</a>
+      <a class="btn-ghost" href="#work">View My Work</a>
+    </div>
+  </div>
+
+  <!-- Stat bar: white background, dark ink text — always readable -->
+  <div class="hero-stats">
+    <div class="hero-stat reveal">
+      <span class="stat-num">9</span>
+      <span class="stat-desc">Years in multimedia journalism</span>
+    </div>
+    <div class="hero-stat reveal">
+      <span class="stat-num">3</span>
+      <span class="stat-desc">Major US markets covered</span>
+    </div>
+    <div class="hero-stat reveal">
+      <span class="stat-num green">20K+</span>
+      <span class="stat-desc">Views on a single TikTok post</span>
+    </div>
+    <div class="hero-stat reveal">
+      <span class="stat-num green">Emmy</span>
+      <span class="stat-desc">Nominated · Multimedia Reporting</span>
+    </div>
+  </div>
+  <div class="hero-bg-g" aria-hidden="true">G</div>
+</section>
+
+<!-- TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span class="ticker-item"><strong>CBS News Colorado</strong> · Denver</span>
+    <span class="ticker-item"><strong>KMOV News 4</strong> · St. Louis</span>
+    <span class="ticker-item"><strong>KEYE-TV CBS Austin</strong> · Texas</span>
+    <span class="ticker-item"><strong>Emmy Nominated</strong> · Multimedia Reporting</span>
+    <span class="ticker-item"><strong>20K+ Views</strong> · TikTok</span>
+    <span class="ticker-item"><strong>Social · Writing · Video · Photography</strong></span>
+    <span class="ticker-item"><strong>CBS News Colorado</strong> · Denver</span>
+    <span class="ticker-item"><strong>KMOV News 4</strong> · St. Louis</span>
+    <span class="ticker-item"><strong>KEYE-TV CBS Austin</strong> · Texas</span>
+    <span class="ticker-item"><strong>Emmy Nominated</strong> · Multimedia Reporting</span>
+    <span class="ticker-item"><strong>20K+ Views</strong> · TikTok</span>
+    <span class="ticker-item"><strong>Social · Writing · Video · Photography</strong></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left reveal">
+    <p class="about-years-label">Years of Experience</p>
+    <p class="about-years-num">9</p>
+    <p class="about-years-text">Covering stories that matter in Austin, St. Louis, Cedar Rapids, and Denver.</p>
+    <div class="emmy-badge">
+      <span style="font-size:1.1rem;">★</span>
+      <div>
+        <span class="emmy-text">Emmy Nominated</span>
+        <span class="emmy-sub">Multimedia Reporting</span>
+      </div>
+    </div>
+  </div>
+  <div class="about-right reveal">
+    <p class="section-eyebrow">About Me</p>
+    <h2 class="section-heading">Storyteller.<br>Strategist. <em>Creator.</em></h2>
+    <p class="body-copy">My name is Gabriela Vidal, and my passion is storytelling — whether through a lens, the words I write on a page, or a piece of content that stops someone mid-scroll. I've spent nearly a decade dedicated to the craft across some of the country's top news markets.</p>
+    <p class="body-copy">Currently a reporter at <strong>CBS News Colorado</strong>, I lead planning and execution of high-visibility digital and broadcast stories. I'm also an <strong>Emmy-nominated journalist</strong>, a travel and landscape photographer, and a social media creator connecting everyday audiences with the stories happening around them.</p>
+    <div class="skills-wrap">
+      <span class="skill-tag">Broadcast Journalism</span>
+      <span class="skill-tag">Social Media Strategy</span>
+      <span class="skill-tag">Content Writing</span>
+      <span class="skill-tag">Video Production</span>
+      <span class="skill-tag">Audience Analytics</span>
+      <span class="skill-tag">Photography</span>
+      <span class="skill-tag">Brand Storytelling</span>
+      <span class="skill-tag">Press &amp; PR</span>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="exp-top reveal">
+    <div>
+      <p class="section-eyebrow">Career Timeline</p>
+      <h2 class="section-heading">Where I've <em>Worked</em></h2>
+    </div>
+    <a class="exp-download" href="#">Download Full Résumé ↓</a>
+  </div>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <p class="tl-date">July 2023 – Present</p>
+      <p class="tl-role">Multiskilled Journalist / Reporter</p>
+      <p class="tl-company">CBS News Colorado (KCNC) — Denver, CO</p>
+      <ul class="tl-bullets">
+        <li>Plan, execute, and optimize 5+ high-visibility digital and broadcast stories per week across social, video, and web platforms</li>
+        <li>Analyze audience performance data and platform analytics to tailor content and improve engagement</li>
+        <li>Translate complex information into compelling narratives that support awareness and engagement objectives</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <p class="tl-date">June 2021 – June 2023</p>
+      <p class="tl-role">Multimedia Journalist / Reporter</p>
+      <p class="tl-company">KMOV News 4 — St. Louis, MO</p>
+      <ul class="tl-bullets">
+        <li>Led daily content strategy on Facebook, Twitter, and Instagram — generating posts with hundreds of thousands of likes and shares</li>
+        <li>Used Google Analytics and social insights to optimize stories and increase user engagement and website traffic</li>
+        <li>Created performance-driven branded visuals, graphics, and data visualizations using Excel and Adobe tools</li>
+      </ul>
+    </div>
+    <div class="tl-item reveal">
+      <p class="tl-date">June 2019 – June 2021</p>
+      <p class="tl-role">Multimedia Journalist / Content Writer</p>
+      <p class="tl-company">CBS Austin (KEYE-TV) — Austin, TX</p>
+      <ul class="tl-bullets">
+        <li>Planned and executed 5+ web articles per week across multiple social channels (800–1,500 words each)</li>
+        <li>Built partnerships with nonprofits and advocacy groups to amplify their missions through storytelling and press coverage</li>
+        <li>Integrated audio, video, and visual storytelling to support upper- and mid-funnel engagement strategies</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTOGRAPHY -->
+<section id="photography">
+  <div class="photo-intro reveal">
+    <div>
+      <p class="section-eyebrow">Photography</p>
+      <h2 class="section-heading">Through the <em>Lens</em></h2>
+    </div>
+    <p class="photo-desc">All photography on this site was shot by me. From the mountains of Banff and the springs of Yellowstone to the peaks of Grand Teton — my camera goes everywhere my stories do. Additional work is available on Shutterstock.</p>
+  </div>
+
+  <div class="photo-grid reveal">
+    <div class="photo-card tall">
+      <div class="photo-placeholder">
+        <div class="photo-icon">🏔️</div>
+        <span class="photo-hint">[ Add your Banff photo ]</span>
+      </div>
+      <div class="photo-label">
+        <span class="photo-label-title">Banff National Park</span>
+        <span class="photo-label-year">2026</span>
+      </div>
+    </div>
+    <div class="photo-card">
+      <div class="photo-placeholder">
+        <div class="photo-icon">🦌</div>
+        <span class="photo-hint">[ Add your photo ]</span>
+      </div>
+      <div class="photo-label">
+        <span class="photo-label-title">Elk Moose Crossing, CO</span>
+        <span class="photo-label-year">2024</span>
+      </div>
+    </div>
+    <div class="photo-card">
+      <div class="photo-placeholder">
+        <div class="photo-icon">🏙️</div>
+        <span class="photo-hint">[ Add your photo ]</span>
+      </div>
+      <div class="photo-label">
+        <span class="photo-label-title">Banff Town</span>
+        <span class="photo-label-year">2026</span>
+      </div>
+    </div>
+    <div class="photo-card wide">
+      <div class="photo-placeholder" style="min-height:220px;">
+        <div class="photo-icon">🌋</div>
+        <span class="photo-hint">[ Add your Yellowstone photo ]</span>
+      </div>
+      <div class="photo-label">
+        <span class="photo-label-title">Grand Prismatic Spring, Yellowstone</span>
+        <span class="photo-label-year">2025</span>
+      </div>
+    </div>
+    <div class="photo-card">
+      <div class="photo-placeholder">
+        <div class="photo-icon">⛰️</div>
+        <span class="photo-hint">[ Add your photo ]</span>
+      </div>
+      <div class="photo-label">
+        <span class="photo-label-title">Grand Teton National Park</span>
+        <span class="photo-label-year">2025</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="photo-cta reveal">
+    <a href="https://www.shutterstock.com" target="_blank">View additional photos on Shutterstock →</a>
+  </div>
+</section>
+
+<!-- SOCIAL -->
+<section id="social">
+  <div class="reveal">
+    <p class="section-eyebrow">Social &amp; Digital</p>
+    <h2 class="section-heading">Content That <em>Performs</em></h2>
+  </div>
+  <div class="social-grid">
+    <div class="social-card reveal">
+      <p class="social-platform">TikTok · @lifeasgaby_</p>
+      <p class="social-metric">20K+</p>
+      <p class="social-metric-label">Views in under a week</p>
+      <p class="social-desc">Colorado outdoor and lifestyle content generating over 600 likes in less than 7 days — shareable short-form video that travels fast.</p>
+    </div>
+    <div class="social-card reveal">
+      <p class="social-platform">Instagram · @gabyyyvidal</p>
+      <p class="social-metric">16K+</p>
+      <p class="social-metric-label">Views on a single post</p>
+      <p class="social-desc">CBS Colorado branded content — clickable posts that translate news storytelling into real social engagement with hundreds of likes and comments.</p>
+    </div>
+    <div class="social-card reveal">
+      <p class="social-platform">Facebook &amp; Twitter · KMOV</p>
+      <p class="social-metric">100K+</p>
+      <p class="social-metric-label">Aggregate post reach</p>
+      <p class="social-desc">Led daily social strategy generating posts with hundreds of thousands of likes and shares. Used Google Analytics to continuously optimize and drive traffic.</p>
+    </div>
+    <div class="social-card reveal">
+      <p class="social-platform">Strategy · All Platforms</p>
+      <p class="social-metric">Multi</p>
+      <p class="social-metric-label">Platform expertise</p>
+      <p class="social-desc">From TikTok Reels to long-form web articles — audience-first strategies that align platform behavior with storytelling to drive measurable results.</p>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <div class="reveal">
+    <p class="section-eyebrow">Portfolio</p>
+    <h2 class="section-heading">Featured <em>Work</em></h2>
+  </div>
+  <div class="work-grid reveal">
+    <div class="work-card featured">
+      <div class="work-thumb">📡</div>
+      <div class="work-body">
+        <span class="work-pill">Broadcast</span>
+        <p class="work-name">CBS Colorado · Crime, Health &amp; Politics</p>
+        <p class="work-sub">Denver, CO · 2023–Present</p>
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-thumb">📱</div>
+      <div class="work-body">
+        <span class="work-pill">Social</span>
+        <p class="work-name">TikTok &amp; Instagram Content</p>
+        <p class="work-sub">20K+ Views · 600+ Likes</p>
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-thumb">✍️</div>
+      <div class="work-body">
+        <span class="work-pill">Writing</span>
+        <p class="work-name">Digital &amp; Web Articles</p>
+        <p class="work-sub">News · Features · Long-Form</p>
+      </div>
+    </div>
+    <div class="work-card">
+      <div class="work-thumb">🎬</div>
+      <div class="work-body">
+        <span class="work-pill">Video</span>
+        <p class="work-name">Multimedia Production</p>
+        <p class="work-sub">Shooting · Editing · Distribution</p>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:2rem;font-size:0.8rem;color:var(--muted);">
+    More stories at <a href="https://www.cbsnews.com/colorado/" target="_blank" style="color:var(--green);text-decoration:none;border-bottom:1px solid var(--green-mid);">CBS Colorado →</a>
+  </p>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="reveal">
+    <p class="section-eyebrow">Get In Touch</p>
+    <h2 class="section-heading">Let's Build<br><em>Something</em></h2>
+    <p class="contact-tagline">Open to full-time roles, freelance collaborations, brand partnerships, and creative projects. Whether you need a storyteller, a strategist, or a content creator — let's talk.</p>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:gvidalmedia@gmail.com">
+        <div class="cl-icon">✉</div>
+        <div><span class="cl-type">Email</span><span class="cl-value">gvidalmedia@gmail.com</span></div>
+      </a>
+      <a class="contact-link" href="tel:2243213184">
+        <div class="cl-icon">☎</div>
+        <div><span class="cl-type">Cell</span><span class="cl-value">224-321-3184</span></div>
+      </a>
+      <a class="contact-link" href="https://linkedin.com" target="_blank">
+        <div class="cl-icon">in</div>
+        <div><span class="cl-type">LinkedIn</span><span class="cl-value">Gabriela Vidal</span></div>
+      </a>
+      <a class="contact-link" href="https://instagram.com/gabyyyvidal" target="_blank">
+        <div class="cl-icon">◎</div>
+        <div><span class="cl-type">Instagram / TikTok</span><span class="cl-value">@gabyyyvidal · @lifeasgaby_</span></div>
+      </a>
+    </div>
+  </div>
+  <div class="contact-right-panel reveal">
+    <p class="crp-label">Currently Open To</p>
+    <p class="crp-heading">Bringing the right story to the right audience.</p>
+    <div class="avail-row">
+      <div class="avail-dot"></div>
+      <span class="avail-text">Available for new opportunities</span>
+    </div>
+    <div class="open-to">
+      <div class="open-item">Journalism &amp; Broadcast Reporting</div>
+      <div class="open-item">Social Media Strategy &amp; Management</div>
+      <div class="open-item">Content Writing &amp; Copywriting</div>
+      <div class="open-item">Brand Partnerships &amp; Collaborations</div>
+      <div class="open-item">Photography &amp; Visual Storytelling</div>
+      <div class="open-item">Communications &amp; PR Consulting</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Gabriela Vidal</span>
+  <span class="footer-info">© 2026 · gvidalmedia@gmail.com · Denver, CO</span>
+</footer>
+
+<script>
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) setTimeout(() => e.target.classList.add('in'), i * 90);
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
