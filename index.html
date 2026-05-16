@@ -294,24 +294,15 @@
   .photo-card {
     position: relative; overflow: hidden; border-radius: 3px;
     background: var(--parchment); cursor: pointer;
+    height: 300px;
   }
-  .photo-card.tall { grid-row: span 2; }
   .photo-card.wide { grid-column: span 2; }
-  .photo-placeholder {
-    width: 100%; min-height: 220px;
-    display: flex; flex-direction: column;
-    align-items: center; justify-content: center;
-    padding: 3rem 2rem; text-align: center;
-    background: linear-gradient(135deg, var(--parchment) 0%, var(--green-lt) 100%);
+  .photo-card img {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
     transition: transform 0.4s ease;
   }
-  .photo-card.tall .photo-placeholder { min-height: 460px; }
-  .photo-card:hover .photo-placeholder { transform: scale(1.03); }
-  .photo-icon { font-size: 2rem; margin-bottom: 0.8rem; opacity: 0.45; }
-  .photo-hint {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.62rem; letter-spacing: 0.1em; color: var(--muted);
-  }
+  .photo-card:hover img { transform: scale(1.03); }
   .photo-label {
     position: absolute; bottom: 0; left: 0; right: 0;
     background: linear-gradient(to top, rgba(28,26,23,0.65) 0%, transparent 100%);
@@ -478,6 +469,42 @@
     font-family: 'DM Mono', monospace;
     font-size: 0.62rem; letter-spacing: 0.1em; color: rgba(255,255,255,0.5);
   }
+
+  /* LIGHTBOX */
+  .lightbox {
+    display: none; position: fixed; inset: 0; z-index: 999;
+    background: rgba(28,26,23,0.92); backdrop-filter: blur(6px);
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-inner {
+    position: relative; max-width: 90vw; max-height: 90vh;
+    display: flex; flex-direction: column; align-items: center; gap: 1rem;
+  }
+  .lightbox-inner img {
+    max-width: 100%; max-height: 80vh;
+    object-fit: contain; border-radius: 4px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.5);
+  }
+  .lightbox-caption {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem; font-weight: 700; color: white;
+    display: flex; gap: 1rem; align-items: center;
+  }
+  .lightbox-caption span {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.62rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.5);
+    font-weight: 400;
+  }
+  .lightbox-close {
+    position: absolute; top: -1rem; right: -1rem;
+    width: 36px; height: 36px; border-radius: 50%;
+    background: var(--green); border: none; cursor: pointer;
+    color: white; font-size: 1.1rem; line-height: 1;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: #2e6341; }
 
   /* ANIMATIONS */
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.65s ease, transform 0.65s ease; }
@@ -661,51 +688,36 @@
   </div>
 
   <div class="photo-grid reveal">
-    <div class="photo-card tall">
-      <div class="photo-placeholder">
-        <div class="photo-icon">🏔️</div>
-        <span class="photo-hint">[ Add your Banff photo ]</span>
-      </div>
+    <div class="photo-card wide">
+      <img src="banff national park.jpeg" alt="Banff National Park" />
       <div class="photo-label">
         <span class="photo-label-title">Banff National Park</span>
         <span class="photo-label-year">2026</span>
       </div>
     </div>
     <div class="photo-card">
-      <div class="photo-placeholder">
-        <div class="photo-icon">🦌</div>
-        <span class="photo-hint">[ Add your photo ]</span>
-      </div>
+      <img src="elk moose crossing.jpg" alt="Elk Moose Crossing, CO" />
       <div class="photo-label">
         <span class="photo-label-title">Elk Moose Crossing, CO</span>
         <span class="photo-label-year">2024</span>
       </div>
     </div>
     <div class="photo-card">
-      <div class="photo-placeholder">
-        <div class="photo-icon">🏙️</div>
-        <span class="photo-hint">[ Add your photo ]</span>
-      </div>
+      <img src="banff town.jpeg" alt="Banff Town" />
       <div class="photo-label">
         <span class="photo-label-title">Banff Town</span>
         <span class="photo-label-year">2026</span>
       </div>
     </div>
-    <div class="photo-card wide">
-      <div class="photo-placeholder" style="min-height:220px;">
-        <div class="photo-icon">🌋</div>
-        <span class="photo-hint">[ Add your Yellowstone photo ]</span>
-      </div>
+    <div class="photo-card">
+      <img src="grand prismatic.jpg" alt="Grand Prismatic Spring, Yellowstone" />
       <div class="photo-label">
         <span class="photo-label-title">Grand Prismatic Spring, Yellowstone</span>
         <span class="photo-label-year">2025</span>
       </div>
     </div>
     <div class="photo-card">
-      <div class="photo-placeholder">
-        <div class="photo-icon">⛰️</div>
-        <span class="photo-hint">[ Add your photo ]</span>
-      </div>
+      <img src="grand tetons.jpg" alt="Grand Teton National Park" />
       <div class="photo-label">
         <span class="photo-label-title">Grand Teton National Park</span>
         <span class="photo-label-year">2025</span>
@@ -846,6 +858,18 @@
   <span class="footer-info">© 2026 · gvidalmedia@gmail.com · Denver, CO</span>
 </footer>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightbox-close">✕</button>
+    <img id="lightbox-img" src="" alt="" />
+    <div class="lightbox-caption">
+      <strong id="lightbox-title"></strong>
+      <span id="lightbox-year"></span>
+    </div>
+  </div>
+</div>
+
 <script>
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((e, i) => {
@@ -853,6 +877,28 @@
     });
   }, { threshold: 0.1 });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  const lightbox = document.getElementById('lightbox');
+  const lbImg = document.getElementById('lightbox-img');
+  const lbTitle = document.getElementById('lightbox-title');
+  const lbYear = document.getElementById('lightbox-year');
+
+  document.querySelectorAll('.photo-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const img = card.querySelector('img');
+      const title = card.querySelector('.photo-label-title');
+      const year = card.querySelector('.photo-label-year');
+      lbImg.src = img.src;
+      lbImg.alt = img.alt;
+      lbTitle.textContent = title ? title.textContent : '';
+      lbYear.textContent = year ? year.textContent : '';
+      lightbox.classList.add('open');
+    });
+  });
+
+  document.getElementById('lightbox-close').addEventListener('click', () => lightbox.classList.remove('open'));
+  lightbox.addEventListener('click', (e) => { if (e.target === lightbox) lightbox.classList.remove('open'); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') lightbox.classList.remove('open'); });
 </script>
 </body>
 </html>
